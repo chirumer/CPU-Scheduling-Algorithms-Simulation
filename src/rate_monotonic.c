@@ -1,6 +1,5 @@
 // standard headers
 #include <stdlib.h>
-#include <stdio.h> // temp
 
 // user headers
 #include "rate_monotonic.h"
@@ -24,15 +23,6 @@ struct Active_processes {
 
 
 // static functions
-
-void DEBUG_print_processes(struct Active_processes* processes) {
-    
-    printf("\nProcesses:\n");
-    while (processes != NULL) {
-        printf("%s\n", processes->state.process->name);
-        processes = processes->next;
-    }
-}
 
 // remove process
 void remove_process(struct Active_processes** process) {

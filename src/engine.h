@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdbool.h>
+
 #define PROCESS_NAME_SIZE 20
 
 
@@ -105,3 +107,6 @@ struct Simulation_event* process_expired_event(int timestamp, char process_name[
 
 // simulate
 struct Simulation_events simulate(enum Simulation_type type, void* processes);
+
+// whether any of the events are PROCESS_TIMEOUT
+bool has_timeout(struct Simulation_events events);

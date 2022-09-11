@@ -165,6 +165,18 @@ struct Simulation_event* process_expired_event(int timestamp, char process_name[
     return event;
 }
 
+// whether any of the events are PROCESS_TIMEOUT
+bool has_timeout(struct Simulation_events events) {
+    struct Simulation_event* temp = events.event_head;
+    while (temp != NULL) {
+        if (temp->type == PROCESS_EXPIRED) {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+
 // simulate
 struct Simulation_events simulate(enum Simulation_type type, void* processes) {
     switch (type) {

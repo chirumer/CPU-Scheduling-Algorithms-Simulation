@@ -18,7 +18,7 @@ int main() {
     while (app_running) {
 
         // get user's wish
-        switch(prompt_program_action()) {
+        switch (prompt_program_action()) {
 
             case PROGRAM_SIMULATE:
 
@@ -36,8 +36,19 @@ int main() {
                         // perform simulation
                         struct Simulation_events events = simulate(SIMULATION_RATE_MONOTONIC, (void*)&processes);
 
-                        // display simulation result
-                        display_simulation(events);
+                        // if scheduling is successful
+                        if (!has_timeout(events)) {
+                            // display simulation result
+                            display_simulation(events);
+                        }
+                        else {
+                            display_unsuccessful_scheduling();
+                            enum Choice response = prompt_yes_or_no("Display schedule anyway?");
+                            if (response == CHOICE_YES) {
+                                display_simulation(events);
+                            }
+                        }
+
                         // clean up
                         destroy_simulation_events(&events);
                         break;

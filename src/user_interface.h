@@ -8,11 +8,22 @@ enum Program_action {
     PROGRAM_ACTIONS_START, PROGRAM_SIMULATE, PROGRAM_SETTINGS, PROGRAM_EXIT, PROGRAM_ACTIONS_END
 };
 
+// user choices
+enum Choice {
+    CHOICE_START, CHOICE_YES, CHOICE_NO, CHOICE_END
+};
+
 // greets the user 
 void greet_user();
 
 // say goodbye
 void say_goodbye();
+
+// display unsuccessful scheduling message
+void display_unsuccessful_scheduling();
+
+// get yes or no response from user
+enum Choice prompt_yes_or_no(char* prompt);
 
 // prompt the user for program action
 enum Program_action prompt_program_action();

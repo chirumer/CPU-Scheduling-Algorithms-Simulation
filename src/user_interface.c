@@ -39,6 +39,37 @@ void say_goodbye() {
     printf("Program Exited.\n");
 }
 
+// display unsuccessful scheduling message
+void display_unsuccessful_scheduling() {
+    printf("Scheduling is not possible with given parameters.\n\n");
+}
+
+// get yes or no response from user
+enum Choice prompt_yes_or_no(char* prompt) {
+    
+    // prompt user until she gives a valid Choice
+    while(true) {
+        printf("%s\n", prompt);
+        printf(
+            "(%d) Yes\n"
+            "(%d) No\n"
+            "Your option --> ",
+            CHOICE_YES, CHOICE_NO
+        );
+        int selected_option;
+        scanf ("%d", &selected_option);
+
+        printf("\n");
+
+        if (selected_option > CHOICE_START 
+            && selected_option < CHOICE_END) {
+
+                return selected_option;
+        }
+        printf("Invalid Option. Try Again\n\n");
+    }  
+}
+
 // prompt the user for program action
 enum Program_action prompt_program_action() {
 
