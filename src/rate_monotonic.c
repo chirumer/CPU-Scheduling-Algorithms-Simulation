@@ -170,9 +170,14 @@ struct Simulation_events simulate_rate_monotonic(int start_time, int end_time, s
         // idle -> new process in active processes (process begin)
         if (current_process == NULL && active_processes != NULL) {
             
-            // update structures to start processing from idle
-            add_simulation_event(&events, process_begin_event(t, active_processes->state.process->name));
+            // update structures to start processing
             current_process = &active_processes->state;
+            if (current_process->work_left != current_process->process->execution_time) {
+                add_simulation_event(&events, process_restart_event(t, current_process->process->name));
+            }
+            else {
+                add_simulation_event(&events, process_begin_event(t, current_process->process->name));
+            }
         }
         else if (current_process == NULL) {
             // idle

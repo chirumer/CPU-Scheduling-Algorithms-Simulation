@@ -108,6 +108,20 @@ struct Simulation_event* process_begin_event(int timestamp, char process_name[])
     return event;
 }
 
+// create process restart event
+struct Simulation_event* process_restart_event(int timestamp, char process_name[]) {
+
+    // allocate memory
+    struct Simulation_event* event = malloc(sizeof(struct Simulation_event));
+
+    // set data
+    event->type = PROCESS_RESTART;
+    event->timestamp = timestamp;
+    strcpy(event->data.process_name, process_name);
+
+    return event;
+}
+
 // create process preempt event
 struct Simulation_event* process_preempt_event(int timestamp, char process_from[], char process_to[]) {
 

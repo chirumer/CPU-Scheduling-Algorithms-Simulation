@@ -169,6 +169,10 @@ void display_simulation(struct Simulation_events events) {
                 printf("Process (%s) Begun Executing\n", event.data.process_name);
                 break;
 
+            case PROCESS_RESTART:
+                printf("Process (%s) Has Restarted\n", event.data.process_name);
+                break;
+
             case PROCESS_PREEMPT:
                 printf("Process (%s) Has Pre-empted Process(%s)\n", event.data.switch_info.to, 
                                                                     event.data.switch_info.from);

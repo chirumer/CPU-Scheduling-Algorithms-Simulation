@@ -11,7 +11,7 @@ enum Simulation_type {
 // types of simulation events
 enum Simulation_event_type {
     PROCESS_REQUEST, PROCESS_BEGIN, PROCESS_PREEMPT, PROCESS_COMPLETE, PROCESS_EXPIRED, 
-    SIMULATION_BEGIN, SIMULATION_END
+    PROCESS_RESTART, SIMULATION_BEGIN, SIMULATION_END
 };
 
 // for preempt event data
@@ -90,6 +90,9 @@ struct Simulation_event* process_request_event(int timestamp, char process_name[
 
 // create process begin event
 struct Simulation_event* process_begin_event(int timestamp, char process_name[]);
+
+// create process restart event
+struct Simulation_event* process_restart_event(int begin_timestamp, char process_name[]);
 
 // create process preempt event
 struct Simulation_event* process_preempt_event(int timestamp, char process_from[], char process_to[]);
