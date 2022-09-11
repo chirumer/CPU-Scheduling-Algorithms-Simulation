@@ -24,6 +24,9 @@ void init_simulation_events(struct Simulation_events* list) {
 
 // add simulation event to simulation events list
 void add_simulation_event(struct Simulation_events* list, struct Simulation_event* event) {
+
+    // insert event to end of list
+    event->next = NULL;
     
     // first addition
     if (list->event_head == NULL) {
