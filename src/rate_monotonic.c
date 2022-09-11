@@ -208,7 +208,7 @@ struct Simulation_metrics_list metrics_rate_monotonic(struct Periodic_processes 
         struct Simulation_event* temp = events.event_head;
         while (temp != NULL) {
             
-            if (temp->type == PROCESS_BEGIN && !strcmp(process.name, temp->data.process_name)) {
+            if (temp->type == PROCESS_REQUEST && !strcmp(process.name, temp->data.process_name)) {
                 start_time = temp->timestamp;
             }
             else if (temp->type == PROCESS_COMPLETE && !strcmp(process.name, temp->data.process_name)) {
