@@ -39,3 +39,6 @@ void display_simulation(struct Simulation_events events);
 
 // prompt simulation parameters
 struct Simulation_parameters prompt_simulation_parameters();
+
+// display simulation metrics
+void display_simulation_metrics(struct Simulation_metrics_list metrics);

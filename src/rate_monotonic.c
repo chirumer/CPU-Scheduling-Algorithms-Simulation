@@ -1,5 +1,6 @@
 // standard headers
 #include <stdlib.h>
+#include <string.h>
 
 // user headers
 #include "rate_monotonic.h"
@@ -187,4 +188,43 @@ struct Simulation_events simulate_rate_monotonic(int start_time, int end_time, s
     destroy_processes(&active_processes);
 
     return events;
+}
+
+// get metrics
+struct Simulation_metrics_list metrics_rate_monotonic(struct Periodic_processes processes, struct Simulation_events events) {
+
+    struct Simulation_metrics_list metrics;
+    metrics.length = processes.length;
+    metrics.metrics = malloc(processes.length * sizeof(struct Simulation_metrics));
+
+    for (int i = 0; i < processes.length; i++) {
+        struct Periodic_process process = processes.processes[i];
+
+        int start_time;
+        int n_values = 0;
+        int waiting_time_sum = 0;
+        int turnaround_time_sum = 0;
+
+        struct Simulation_event* temp = events.event_head;
+        while (temp != NULL) {
+            
+            if (temp->type == PROCESS_BEGIN && !strcmp(process.name, temp->data.process_name)) {
+                start_time = temp->timestamp;
+            }
+            else if (temp->type == PROCESS_COMPLETE && !strcmp(process.name, temp->data.process_name)) {
+                int turnaround_time = temp->timestamp - start_time;
+                turnaround_time_sum += turnaround_time;
+                waiting_time_sum += turnaround_time - process.execution_time;
+                n_values++; 
+            }
+
+            temp = temp->next;
+        }
+
+        strcpy(metrics.metrics[i].process_name, process.name);
+        metrics.metrics[i].turnaround_time = (double) turnaround_time_sum / n_values;
+        metrics.metrics[i].waiting_time = (double) waiting_time_sum / n_values;
+    }
+    
+    return metrics;
 }

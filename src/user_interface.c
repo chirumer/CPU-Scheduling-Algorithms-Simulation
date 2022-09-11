@@ -231,3 +231,17 @@ void display_simulation(struct Simulation_events events) {
 
     printf("\n");
 }
+
+// display simulation metrics
+void display_simulation_metrics(struct Simulation_metrics_list metrics) {
+
+    printf("Algorithm Metrics:\n");
+    printf("Proccess Name     | Waiting Time     | Turnaround Time  |\n");
+
+    for (int i = 0; i < metrics.length; i++) {
+
+        printf("  %-16s|  %-16lf|  %-16lf\n", metrics.metrics[i].process_name, 
+               metrics.metrics[i].waiting_time, metrics.metrics[i].turnaround_time);
+    }
+    printf("\n");
+}

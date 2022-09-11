@@ -40,6 +40,8 @@ int main() {
                         if (!has_timeout(events)) {
                             // display simulation result
                             display_simulation(events);
+                            struct Simulation_metrics_list metrics = get_simulation_metrics(SIMULATION_RATE_MONOTONIC, (void*)&processes, events);
+                            display_simulation_metrics(metrics);
                         }
                         else {
                             display_unsuccessful_scheduling();

@@ -188,3 +188,11 @@ struct Simulation_events simulate(enum Simulation_type type, void* processes) {
                                            *(struct Periodic_processes*)processes);
     }
 }
+
+// get simulation metrics
+struct Simulation_metrics_list get_simulation_metrics(enum Simulation_type type, void* processes, struct Simulation_events events) {
+    switch (type) {
+        case SIMULATION_RATE_MONOTONIC:
+        return metrics_rate_monotonic(*(struct Periodic_processes*)processes, events);
+    }
+}

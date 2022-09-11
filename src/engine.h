@@ -59,6 +59,20 @@ struct Periodic_processes {
     int length;
 };
 
+// simulation metrics
+struct Simulation_metrics {
+    char process_name[PROCESS_NAME_SIZE];
+    double turnaround_time;
+    double waiting_time;
+};
+
+// simulation metrics list
+struct Simulation_metrics_list {
+        // array implementation
+    struct Simulation_metrics* metrics;
+    int length;
+};
+
 // Simulation parameters
 struct Simulation_parameters {
     int start_time;
@@ -107,6 +121,9 @@ struct Simulation_event* process_expired_event(int timestamp, char process_name[
 
 // simulate
 struct Simulation_events simulate(enum Simulation_type type, void* processes);
+
+// get simulation metrics
+struct Simulation_metrics_list get_simulation_metrics(enum Simulation_type type, void* processes, struct Simulation_events events);
 
 // whether any of the events are PROCESS_TIMEOUT
 bool has_timeout(struct Simulation_events events);
