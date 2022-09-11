@@ -129,10 +129,10 @@ struct Simulation_events simulate_rate_monotonic(int start_time, int end_time, s
                 }
             }
 
-            struct Active_processes* dummy = malloc(sizeof(struct Active_processes));
-            dummy->next = active_processes;
+            struct Active_processes dummy;
+            dummy.next = active_processes;
 
-            struct Active_processes* temp = dummy;
+            struct Active_processes* temp = &dummy;
 
             // traverse the process list and check for timeouts
             while (temp->next != NULL) {
@@ -153,7 +153,7 @@ struct Simulation_events simulate_rate_monotonic(int start_time, int end_time, s
                 }
             }
 
-            active_processes = dummy->next;
+            active_processes = dummy.next;
         }
 
         // add new processes
